@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.toyproject01.mapper.PostMapper">
+    <resultMap type="PostDTO" id="Post">
+        <id column="id" property="id"></id>
+
+        <result property="no" column="no" />
+        <result property="name" column="name" />
+        <result property="subject" column="subject" />
+        <result property="content" column="content" />
+        <result property="pwd" column="pwd" />
+        <result property="regdate" column="regdate" />
+        <result property="hit" column="hit" />
+    </resultMap>
+
+<!--    조회-->
+    <select id="findPost" resultType="PostDTO">
+        select * from board where no=#{no}
+    </select>
+<!--    글쓰기-->
+    <insert id="insertPost">
+        insert into board values (#{no},#{name},#{subject},#{content},#{pwd},#{regdate},#{hit})
+    </insert>
+
+<!--    수정-->
+    <update id="updatePost">
+        update board
+        set name    = #{name},
+            subject = #{subject},
+            content = #{content},
+            pwd     = #{pwd},
+            regdate = #{regdate},
+            hit     = #{hit}
+        where no = #{no};
+    </update>
+
+<!--    삭제-->
+    <delete id="deletePost">
+        delete from board where no = #{no}
+    </delete>
+</mapper>
